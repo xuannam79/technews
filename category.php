@@ -1,0 +1,167 @@
+<?php
+   require_once $_SERVER['DOCUMENT_ROOT'].'/templates/public/inc/header.php';
+   $id = $_GET['id'];
+   ?>
+<!-- section -->
+<br/>
+
+<div class="section">
+	
+   <!-- container -->
+   <div class="container">
+   <div class="section-title">
+		<?php 
+		$queryGetCat = "select name from cat where cat_id = $id";
+		$resultGetCat  = $mysqli->query($queryGetCat);
+         $arGetCat = mysqli_fetch_assoc($resultGetCat);
+		?>
+		<h2><?php echo $arGetCat['name']?></h2>
+	</div>
+      <!-- row -->
+      <div class="row">
+         <div class="col-md-8">
+            <div class="row">
+               <!-- post -->
+               <?php 
+                  if($id==1 || $id==2 || $id==6){
+                  	$queryCat = "select n.*,c.name as 'catname', c.color as 'catcolor' from news n inner join cat c on n.cat_id=c.cat_id where n.cat_id={$id} or c.parent_id={$id} order by news_id DESC limit 0,1";
+                  }
+                  else{
+                  	$queryCat = "select n.*,c.name as 'catname', c.color as 'catcolor' from news n inner join cat c on n.cat_id=c.cat_id where n.cat_id={$id} order by news_id DESC limit 0,1";
+                  }
+                  	$resultCat  = $mysqli->query($queryCat);
+                  	while($arCat = mysqli_fetch_assoc($resultCat))
+                  	{
+						$newsid = $arCat['news_id'];
+						$queryTSCM = "SELECT COUNT(news_id) as TSCM from comment WHERE news_id=$newsid";
+						$resultTSCM = $mysqli->query($queryTSCM);
+						$arTSCM = mysqli_fetch_assoc($resultTSCM);
+						
+                  		$urlDetail = '/'.utf8ToLatin($arCat['name']).'-'.$arCat['news_id'].'.html';
+                  		$urlCat = '/cat/'.utf8ToLatin($arCat['catname']).'-'.$arCat['cat_id'];
+                  ?>
+               <div class="col-md-12">
+                  <div class="post post-thumb">
+                     <a class="post-img" href="<?php echo $urlDetail?>"><img src="/files/<?php echo $arCat['picture']?>" alt="" width=750 height=450></a>
+                     <div class="post-body">
+                        <div class="post-meta">
+                           <a class="post-category cat-<?php echo $arCat['catcolor']?>" href="<?php echo $urlCat?>"><?php echo $arCat['catname']?></a>
+                           <span class="post-date"><?php echo $arCat['date_create']?></span>
+                           &nbsp <i class="fa fa-eye" style="font-size:14px;color:#FFFFFF"><?php echo $arCat['counter']?></i>
+						   &nbsp <i class="fa fa-comment-o" style="font-size:14px;color:#FFFFFF"><?php echo $arTSCM['TSCM']?></i>
+                        </div>
+                        <h3 class="post-title"><a href="<?php echo $urlDetail?>"><?php echo $arCat['name']?></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <?php }?>
+               <!--/post -->
+               <!-- post -->
+               <?php 
+                  if($id==1 || $id==2 || $id==6){
+                  	$queryCat = "select n.*,c.name as 'catname', c.color as 'catcolor' from news n inner join cat c on n.cat_id=c.cat_id where n.cat_id={$id} or c.parent_id={$id} order by news_id DESC limit 1,2";
+                  }
+                  else{
+                  	$queryCat = "select n.*,c.name as 'catname', c.color as 'catcolor' from news n inner join cat c on n.cat_id=c.cat_id where n.cat_id={$id} order by news_id DESC limit 1,2";
+                  }
+                  $resultCat  = $mysqli->query($queryCat);
+                  while($arCat = mysqli_fetch_assoc($resultCat))
+                  {
+					$newsid = $arCat['news_id'];
+					$queryTSCM = "SELECT COUNT(news_id) as TSCM from comment WHERE news_id=$newsid";
+					$resultTSCM = $mysqli->query($queryTSCM);
+					$arTSCM = mysqli_fetch_assoc($resultTSCM);
+					
+                  	$urlDetail = '/'.utf8ToLatin($arCat['name']).'-'.$arCat['news_id'].'.html';
+                  	$urlCat = '/cat/'.utf8ToLatin($arCat['catname']).'-'.$arCat['cat_id'];
+                  ?>
+               <div class="col-md-6">
+                  <div class="post">
+                     <a class="post-img" href="<?php echo $urlDetail?>"><img src="/files/<?php echo $arCat['picture']?>" alt="" width=360 height=216></a>
+                     <div class="post-body">
+                        <div class="post-meta">
+                           <a class="post-category cat-<?php echo $arCat['catcolor']?>" href="<?php echo $urlCat?>"><?php echo $arCat['catname']?></a>
+                           <span class="post-date"><?php echo $arCat['date_create']?></span>
+                           &nbsp <i class="fa fa-eye" style="font-size:14px;color:#3D455C"><?php echo $arCat['counter']?></i>
+						   &nbsp <i class="fa fa-comment-o" style="font-size:14px;color:#3D455C"><?php echo $arTSCM['TSCM']?></i>
+                        </div>
+                        <h3 class="post-title"><a href="<?php echo $urlDetail?>"><?php echo $arCat['name']?></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <?php }?>
+               <!--/post -->
+               <div class="clearfix visible-md visible-lg"></div>
+               <!-- ad -->
+               <div class="col-md-12">
+                  <div class="section-row">
+                     <a href="#">
+                     <img class="img-responsive center-block" src="/files/a-2.gif" alt="" >
+                     </a>
+                  </div>
+               </div>
+               <!-- ad -->
+               <!-- post -->
+               <?php
+                  if($id==1 || $id==2 || $id==6){
+                  	$queryCat = "select n.*,c.name as 'catname', c.color as 'catcolor' from news n inner join cat c on n.cat_id=c.cat_id where n.cat_id={$id} or c.parent_id={$id} order by news_id DESC limit 3,4";
+                  }
+                  else{
+                  	$queryCat = "select n.*,c.name as 'catname', c.color as 'catcolor' from news n inner join cat c on n.cat_id=c.cat_id where n.cat_id={$id} order by news_id DESC limit 3,4";
+                  }
+                  	$resultCat  = $mysqli->query($queryCat);
+                  	while($arCat = mysqli_fetch_assoc($resultCat))
+                  	{
+						$newsid = $arCat['news_id'];
+						$queryTSCM = "SELECT COUNT(news_id) as TSCM from comment WHERE news_id=$newsid";
+						$resultTSCM = $mysqli->query($queryTSCM);
+						$arTSCM = mysqli_fetch_assoc($resultTSCM);
+					
+                  		$urlDetail = '/'.utf8ToLatin($arCat['name']).'-'.$arCat['news_id'].'.html';
+                  		$urlCat = '/cat/'.utf8ToLatin($arCat['catname']).'-'.$arCat['cat_id'];
+                  ?>
+               <div class="col-md-12">
+                  <div class="post post-row">
+                     <a class="post-img" href="<?php echo $urlDetail?>"><img src="/files/<?php echo $arCat['picture']?>" alt=""></a>
+                     <div class="post-body">
+                        <div class="post-meta">
+                           <a class="post-category cat-<?php echo $arCat['catcolor']?>" href="<?php echo $urlCat?>"><?php echo $arCat['catname']?></a>
+                           <span class="post-date"><?php echo $arCat['date_create']?></span>
+                           &nbsp <i class="fa fa-eye" style="font-size:14px;color:#3D455C"><?php echo $arCat['counter']?></i>
+						   &nbsp <i class="fa fa-comment-o" style="font-size:14px;color:#3D455C"><?php echo $arTSCM['TSCM']?></i>
+                        </div>
+                        <h3 class="post-title"><a href="<?php echo $urlDetail?>"><?php echo $arCat['name']?></a></h3>
+                        <p><?php echo $arCat['preview']?></p>
+                     </div>
+                  </div>
+               </div>
+               <?php }?>
+               <!--/post -->
+            </div>
+         </div>
+         <div class="col-md-4">
+            <!-- ad -->
+            <div class="aside-widget text-center">
+               <img src="https://techmaster.vn/fileman/Uploads/users/188/1-EERzyzZhHJ5FWXKi2PNxuA.gif" alt="" width="350" height="250">
+            </div>
+            <div class="aside-widget text-center">
+               <a href="#" style="display: inline-block;margin: auto;">
+               <iframe width="350" height="250" src="https://www.youtube.com/embed/cnzVCBcsn3I" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+               </iframe>
+               </a>
+            </div>
+            <!--/ad -->
+            <?php
+               require_once $_SERVER['DOCUMENT_ROOT'].'/templates/public/inc/right-mostRead.php';
+               require_once $_SERVER['DOCUMENT_ROOT'].'/templates/public/inc/right-cat.php';
+               ?>
+         </div>
+      </div>
+      <!--/row -->
+   </div>
+   <!--/container -->
+</div>
+<!--/section -->
+<?php
+   require_once $_SERVER['DOCUMENT_ROOT'].'/templates/public/inc/footer.php';
+   ?>

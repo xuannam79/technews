@@ -1,0 +1,36 @@
+RewriteEngine On
+RewriteBase /
+#viết luật cho các đường dẫn dự án
+#RewriteRule	^page/([0-9]*)$ /index.php?page=$1
+#RewriteRule	^lien-he$ /contact.php
+#detail.php?id=32 => /detail/toi-nhu-anh-duong-ruc-ro-32.html
+#RewriteRule ^detail/(.*)-([0-9]*).html /detail.php?id=$2
+#cat.php?id=2
+#RewriteRule ^cat/(.*)-([0-9]+) /cat.php?id=$2
+
+#RewriteRule ^cat/(.*)-([0-9]*)/page/([0-9]*) /cat.php?id=$2&page=$3
+
+
+
+#RewriteRule	^login$ /admin/auth/login.php
+
+#detail.php?id=36
+#RewriteRule ^chi-tiet/(.*)-([0-9]+) /detail.php?id=$2
+
+RewriteRule ^(.*)-([0-9]*).html /detail.php?id=$2
+
+
+RewriteRule ^tin-pho-bien$  /popular.php?id=2
+
+RewriteRule	^trang-chu$ /index.php
+
+RewriteRule ^lien-he$ /contact.php
+
+RewriteRule ^cat/(.*)-([0-9]*) /category.php?id=$2
+
+
+
+
+
+
+

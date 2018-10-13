@@ -1,0 +1,45 @@
+
+.dropdown li a{
+	height: 40px;
+	border: none;
+}
+.dropdown li {
+	background: #FAFAFA;
+	width: 108px;
+	height: 50px;
+}
+.dropdown li a {
+	line-height: 10px;
+}
+.container ul {
+
+	height: 52px;
+
+}
+.container ul li {
+	height: 50px;
+	
+	position: relative;
+}
+.container ul li a {
+	display: block;
+}
+.container ul li a:hover {
+	background: white;
+	color: #FF0000;
+}
+.container ul li > .dropdown {
+	display: none;
+	position: absolute;
+}
+.container ul li:hover .dropdown {
+	display: block;
+}
+.dropdown ul {
+	left: 150px;
+	top:0px;
+	
+}
+/* tạo marquee */
+
+
