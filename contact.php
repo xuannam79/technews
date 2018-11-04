@@ -134,7 +134,7 @@
 <!--===============================================================================================-->
 	<script src="/templates/public/vendor/vendorContact/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM"></script>
 	<script src="/templates/public/js/jsContact/map-custom.js"></script>
 <!--===============================================================================================-->
 	<script src="/templates/public/js/jsContact/main.js"></script>
